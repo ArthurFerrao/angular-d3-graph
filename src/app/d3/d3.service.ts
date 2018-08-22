@@ -41,7 +41,7 @@ export class D3Service {
 
       function dragged() {
         console.log("drag");
-        
+
         node.fx = d3.event.x;
         node.fy = d3.event.y;
       }
