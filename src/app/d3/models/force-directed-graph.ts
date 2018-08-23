@@ -33,7 +33,8 @@ export class ForceDirectedGraph {
     link = new Link(source, target);
     this.simulation.stop();
     this.links.push(link);
-    this.simulation.alphaTarget(0.3).restart();
+    //this.simulation.alphaTarget(0.3).restart();
+
 
     this.initLinks();
   }
@@ -68,10 +69,6 @@ export class ForceDirectedGraph {
       const ticker = this.ticker;
 
       this.simulation = d3.forceSimulation()
-        .force('charge',
-          d3.forceManyBody()
-            .strength(d => FORCES.CHARGE * d['r'])
-        )
         .force('collide',
           d3.forceCollide()
             .strength(FORCES.COLLISION)

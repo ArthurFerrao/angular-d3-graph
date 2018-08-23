@@ -21,13 +21,14 @@ export class GraphComponent implements OnInit, AfterViewInit {
   graph: ForceDirectedGraph;
   private _options: { width, height } = { width: 800, height: 600 };
 
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.graph.initSimulation(this.options);
   }
 
 
-  constructor(private d3Service: D3Service, private ref: ChangeDetectorRef) {}
+  constructor(private d3Service: D3Service, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     /** Receiving an initialized simulated graph from our custom d3 service */
@@ -50,6 +51,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
       this.nodes[i].fx = null;
       this.nodes[i].fy = null;
     }*/
+  }
+
+  connectnodes(n1, n2) {
+    this.graph.connectNodes(n1, n2);
   }
 
   get options() {

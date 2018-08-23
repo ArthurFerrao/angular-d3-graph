@@ -2,7 +2,7 @@ import { GraphComponent } from './visuals/graph/graph.component';
 import { Component } from '@angular/core';
 import APP_CONFIG from './app.config';
 import { Node, Link } from './d3';
-
+import * as d3 from 'd3';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,31 +10,32 @@ import { Node, Link } from './d3';
 })
 
 export class AppComponent {
+
   nodes: Node[] = [];
   links: Link[] = [];
 
   constructor() {
 
-    /** constructing the nodes array */
-
-    this.nodes.push(new Node(1,0,20));
-    this.nodes.push(new Node(2,200,20));
-    this.nodes.push(new Node(3,400, 20));
-
-
-    /** connecting the nodes before starting the simulation */
-    this.links.push(new Link(1, 2));
-    this.links.push(new Link(3, 2));
   }
   addNodes(graph: GraphComponent) {
-    this.addNodeAsync().then(() => {
+
+
+    let n1 = new Node(this.nodes.length, 100, 220, 100, 220);
+    let n2 = new Node(this.nodes.length + 1, 400, 300, 400, 300);
+
+    this.connectNodesAsync(graph, n1, n2).then(() => {
 
       graph.ngOnInit();
+
     })
+
   }
 
-  async addNodeAsync() {
-    await this.nodes.push(new Node(4, 100, 220));
-    await this.nodes.push(new Node(5, 400, 300));
+  async connectNodesAsync(graph, n1, n2) {
+
+    await this.nodes.push(n1);
+    await this.nodes.push(n2);
+    await graph.connectnodes(this.nodes.length - 2, this.nodes.length - 1);
   }
+
 }

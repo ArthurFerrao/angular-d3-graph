@@ -34,7 +34,10 @@ export class D3Service {
       d3.event.sourceEvent.stopPropagation();
 
       if (!d3.event.active) {
-        graph.simulation.alphaTarget(0.3).restart();
+        // graph.simulation.alphaTarget(0.3).restart();
+        graph.initSimulation({ width: 800, height: 600 });
+        console.log("restart"); // 1
+
       }
 
       d3.event.on('drag', dragged).on('end', ended);
@@ -44,17 +47,29 @@ export class D3Service {
 
         node.fx = d3.event.x;
         node.fy = d3.event.y;
+
+
       }
 
       function ended() {
+        console.log("end"); // 2
         console.log(node);
 
         if (!d3.event.active) {
           graph.simulation.alphaTarget(0);
+          //graph.simulation.alphaTarget(0.3).restart();
+          // graph.initSimulation({ width: 800, height: 600 });
+
+          console.log("simu"); // 3
+
         }
+
+
 
         node.fx = null;
         node.fy = null;
+
+
       }
     }
 
