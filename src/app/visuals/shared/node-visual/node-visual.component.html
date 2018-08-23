@@ -1,0 +1,17 @@
+<svg:g
+  *ngIf = "!isNaN(node.x) && !isNaN(node.y) && !isNaN(node.vx) && !isNaN(node.vy)";
+    then #notNaN>
+  <ng-template #notNaN [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"></ng-template>
+      <svg:circle
+          class="node"
+          [attr.fill]="node.color"
+          cx="0"
+          cy="0"
+          [attr.r]="30">
+      </svg:circle>
+      <svg:text
+          class="node-name"
+          [attr.font-size]="node.fontSize">
+        {{node.id}}
+      </svg:text>
+</svg:g>

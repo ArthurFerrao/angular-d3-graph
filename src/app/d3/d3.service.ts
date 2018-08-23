@@ -34,17 +34,12 @@ export class D3Service {
       d3.event.sourceEvent.stopPropagation();
 
       if (!d3.event.active) {
-        // graph.simulation.alphaTarget(0.3).restart();
-        graph.initSimulation({ width: 800, height: 600 });
-        console.log("restart"); // 1
-
+       graph.simulation.alphaTarget(0.3).restart();
       }
 
       d3.event.on('drag', dragged).on('end', ended);
 
       function dragged() {
-        console.log("drag");
-
         node.fx = d3.event.x;
         node.fy = d3.event.y;
 
@@ -52,23 +47,14 @@ export class D3Service {
       }
 
       function ended() {
-        console.log("end"); // 2
-        console.log(node);
-
         if (!d3.event.active) {
           graph.simulation.alphaTarget(0);
-          //graph.simulation.alphaTarget(0.3).restart();
-          // graph.initSimulation({ width: 800, height: 600 });
-
-          console.log("simu"); // 3
-
         }
 
 
 
         node.fx = null;
         node.fy = null;
-
 
       }
     }

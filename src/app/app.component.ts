@@ -20,22 +20,20 @@ export class AppComponent {
   addNodes(graph: GraphComponent) {
 
 
-    let n1 = new Node(this.nodes.length, 100, 220, 100, 220);
-    let n2 = new Node(this.nodes.length + 1, 400, 300, 400, 300);
+    let n1 = new Node(this.nodes.length, 100, 220);
+    let n2 = new Node(this.nodes.length + 1, 400, 600);
 
-    this.connectNodesAsync(graph, n1, n2).then(() => {
+    this.connectNodesAsync(graph, n1, n2);
 
       graph.ngOnInit();
 
-    })
-
   }
 
-  async connectNodesAsync(graph, n1, n2) {
+  connectNodesAsync(graph, n1, n2) {
 
-    await this.nodes.push(n1);
-    await this.nodes.push(n2);
-    await graph.connectnodes(this.nodes.length - 2, this.nodes.length - 1);
+    this.nodes.push(n1);
+    this.nodes.push(n2);
+    graph.connectnodes(this.nodes.length - 2, this.nodes.length - 1);
   }
 
 }
